@@ -52,91 +52,69 @@ The architecture adheres to "Keep It Simple, Stupid" philosophy:
 ### Biopharmaceutical R&D Analysis
 
 #### User Input
-Complex query: "How do clinical trial results impact stock prices and patent filings?"
+"How do clinical trial results impact stock prices and patent filings?"
 
 #### Supervisor Agent
-- Decomposes query into three domain-specific sub-queries
-- Routes to R&D Agent, Finance Agent, and Legal Agent
-- Establishes execution order and dependencies
+Decomposes query into domain-specific sub-queries and routes to specialized agents
 
 #### Specialized Agents
 
 **R&D Agent**
-- Accesses clinical trial reports via Amazon Athena
-- Extracts trial outcomes, efficacy data, and timelines
+Accesses clinical trial reports via Amazon Athena with granular permissions
 
 **Finance Agent**
-- Queries stock price data via Amazon Redshift
-- Analyzes historical correlations between trial announcements and stock movement
+Queries stock price data via Amazon Redshift
 
 **Legal Agent**
-- Reviews patent filing database
-- Identifies relevant intellectual property implications
+Reviews patent filing database
 
 #### Knowledge Graph
-- Entities extracted: trial names, drug compounds, patent IDs, stock symbols
-- Relationships mapped: trial-to-patent, trial-to-stock-movement
-- Parent-child structure: full reports (parent) with key findings (child)
+Entities extracted and relationships mapped in parent-child structure
 
 #### Consortium Reasoning
-- GPT, Gemini, Claude, and Llama generate independent analysis drafts
-- Reasoning Agent audits for consistency and factual grounding
-- Consensus output synthesized from multi-model agreement
+GPT, Gemini, Claude, Llama generate independent drafts; Reasoning Agent audits and synthesizes consensus
 
 #### Output
-Holistic response integrating R&D, financial, and legal perspectives with source attribution
+Holistic response integrating R&D, financial, and legal perspectives
 
 ---
 
 ### Multimodal Media Generation
 
 #### User Input
-News feed URLs or topic keywords for podcast generation
+News feed URLs or topic keywords for automated podcasting
 
 #### Supervisor Agent
-- Initiates web search workflow
-- Coordinates scraping, filtering, and script generation agents
+Initiates web search workflow and coordinates specialized agents
 
 #### Specialized Agents
 
 **Web Search Agent**
-- Performs targeted searches for relevant content
-- Returns list of candidate URLs
+Performs targeted searches for relevant content
 
-**Scraping Agent**
-- Extracts markdown content from identified sources
-- Handles pagination and dynamic content loading
+**Scraping Agent (Scrape Markdown)**
+Extracts markdown content from identified sources
 
-**Filtering Agent**
-- Applies semantic relevance scoring
-- Removes low-quality or duplicate content
-- Validates content completeness
+**Filtering Agent (Topic Filtering)**
+Applies semantic relevance scoring and removes low-quality content
 
 **Script Generation Agent**
-- Synthesizes filtered content into podcast script
-- Structures narrative flow and key talking points
+Synthesizes filtered content into podcast script
 
 **Veo JSON Builder Agent**
-- Generates video generation instructions
-- Specifies visual elements, transitions, and timing
+Generates video generation instructions for Veo-3
 
 **Audio Synthesis Agent**
-- Converts script to speech using TTS models
-- Applies voice modulation and pacing
+Converts script to speech using TTS models
 
 #### Knowledge Graph
-- Not primary focus for this workflow
-- Lightweight entity tracking for topic consistency
+Lightweight entity tracking for topic consistency
 
 #### Consortium Reasoning
-- Multiple models generate script variations
-- Reasoning Agent selects most coherent and engaging version
+Multiple models generate script variations; Reasoning Agent selects most coherent version
 
 #### Output
-- Professional podcast script
-- Audio file (MP3/WAV)
-- Video generation instructions (JSON)
-- GitHub pull request with all assets
+Podcast script, audio file, video instructions (JSON), GitHub pull request with assets
 
 ---
 
@@ -146,108 +124,70 @@ News feed URLs or topic keywords for podcast generation
 University course catalog URLs or YouTube playlist links
 
 #### Supervisor Agent
-- Initiates funnel architecture workflow
-- Coordinates extraction, filtering, and categorization phases
+Initiates funnel architecture workflow (Extract → Filter → Categorize)
 
 #### Extraction Phase
 
 **Scraping Agent**
-- Parses course catalog HTML using BeautifulSoup
-- Extracts YouTube transcripts via YouTube Data API v3
-- Captures course titles, descriptions, prerequisites, academic levels
+Parses course catalogs using BeautifulSoup and extracts YouTube transcripts via YouTube Data API v3
 
 #### Filtering Phase
 
 **Filtering Agent**
-- Applies semantic relevance filters
-- Removes outdated or irrelevant courses
-- Validates data completeness (title, description, level)
-- Deduplicates entries
+Applies semantic relevance filters and validates data completeness
 
 #### Categorization Phase
 
 **Categorization Agent**
-- Classifies courses along tailored dimensions (discipline, competency, difficulty)
-- Maps to industry skill frameworks
-- Generates estimated reading/viewing times
+Classifies courses along tailored dimensions (discipline, competency)
 
 **Synthesis Agent**
-- Creates structured syllabus with module breakdown
-- Generates insights per module
-- Produces curriculum benchmark report
+Creates structured syllabus with module breakdown
 
 #### Knowledge Graph
 
 **Parent-Child Structure**
-- Full transcripts split into 512-character parent chunks
-- Parent chunks subdivided into 140-character child chunks
-- Child chunks contain embeddings for vector search
-- Parent chunks provide full context for LLM response generation
+512-character parent chunks for context, 140-character child chunks for embeddings
 
 **Entity Linking**
-- Concepts extracted: "Neural Networks," "Backpropagation," "Gradient Descent"
-- Prerequisite relationships mapped: "Linear Algebra" → "Neural Networks"
-- Visual concept map generated for interactive exploration
+Concepts extracted and prerequisite relationships mapped
+
+**Concept Map**
+Visual graph showing learning path dependencies
 
 #### Consortium Reasoning
-- Multiple models validate curriculum categorization
-- Achieves 90%+ agreement with human expert analysis
+Multiple models validate curriculum categorization, achieving 90%+ agreement with human experts
 
 #### Output
-- Structured syllabus with progress tracking
-- Concept map visualization
-- Curriculum benchmark report
-- Master notes with timestamps and screenshots
+Structured syllabus, concept map visualization, curriculum benchmark report, master notes with timestamps
 
 ---
 
 ### AI Learning Copilot
 
 #### User Input
-Learning goal: "Learn Next.js"
+Learning goal (e.g., "Learn Next.js")
 
 #### Planner Agent (Curriculum Architect)
-- Analyzes user goal and current knowledge state
-- Queries Learning Memory for completed topics
-- Identifies weak areas from past assessments
-- Generates hierarchical roadmap with milestones
+Analyzes goal, checks Learning Memory, identifies weak areas, generates hierarchical roadmap
 
 #### Socratic Tutor Agent (Instructional Agent)
-- Conducts real-time learning session
-- Applies Socratic prompting strategy
-- Adapts to Learning Mode (Student vs Developer)
-- Provides hints, code snippets, or conceptual analogies
-- Avoids direct answers to encourage critical thinking
+Conducts real-time session using Socratic prompting strategy, adapts to Learning Mode (Student/Developer)
 
 #### Code Pathologist Agent (Diagnostic Agent)
-- User submits code for "Explain My Code" feature
-- Analyzes logic, edge cases, and security vulnerabilities
-- Identifies fundamental misunderstandings
-- Signals Planner Agent to update roadmap if gaps detected
+Analyzes code for logic, edge cases, security vulnerabilities; signals Planner Agent if gaps detected
 
 #### Assessment Specialist Agent (Evaluator Agent)
-- Generates contextual quiz based on current topic
-- Evaluates user answers with detailed feedback
-- Triggers review session if assessment failed
-- Updates Learning Memory with performance data
+Generates contextual quizzes, evaluates answers, triggers review sessions, implements automated feedback loops
 
 #### Knowledge Graph
-- Learning path stored as directed graph
-- Nodes: topics, concepts, code examples
-- Edges: prerequisite relationships, difficulty progression
-- User progress tracked per node
+Learning path stored as directed graph with prerequisite relationships
 
 #### Consortium Reasoning
-- Multiple models generate quiz questions
-- Reasoning Agent ensures questions are fair and relevant
-- Consensus on correct answers and explanations
+Multiple models generate quiz questions; Reasoning Agent ensures fairness and relevance
 
 #### Output
-- Personalized learning roadmap
-- Real-time tutoring with Socratic dialogue
-- Code analysis with vulnerability detection
-- Adaptive quizzes with automated feedback loops
-- Neural Sync Streak gamification
+Personalized roadmap, Socratic tutoring, code analysis, adaptive quizzes, Neural Sync Streak gamification
 
 ## 3. Data & Retrieval Design
 
